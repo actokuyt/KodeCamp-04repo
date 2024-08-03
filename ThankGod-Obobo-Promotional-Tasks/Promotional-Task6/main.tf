@@ -14,6 +14,9 @@ provider "aws" {
 
 module "vpc" {
   source = "./vpc"
+
+  cidr_block = "10.0.0.0/16"
+  vpc_name = "KCVPC"
 }
 
 module "subnet" {
@@ -63,6 +66,9 @@ module "nacl" {
 module "ec2" {
   source = "./ec2"
 
+  ami_id = "ami-0932dacac40965a65"
+  instance_type = "t2.micro"
+  key_name = "awsec2"
   public_subnet_id = module.subnet.public_subnet_id
   public_sg_id  = module.sg.public_sg_id
   private_subnet_id = module.subnet.private_subnet_id
